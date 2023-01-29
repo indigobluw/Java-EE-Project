@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController //webservice uses restcontroller while other controllers use controller
 public class ToDoListWebServiceController {
     private final ToDoListRepository toDoListRepository;
 
@@ -15,10 +15,10 @@ public class ToDoListWebServiceController {
         this.toDoListRepository = toDoListRepository;
     }
 
-    @GetMapping("/ws/ToDoList")
-    public String hello(Model model) {
+    @GetMapping("/ToDoList")
+    public String hello(Model model) { //returns string cuz it's a text doc
         model.addAttribute("message", "hello world");
-        return "mains.html";
+        return "index.html"; //utan thymeleaf får du skriva .html, men thymeleaf behövs det inte
     }
     @GetMapping("/admin")
     public String admin () {

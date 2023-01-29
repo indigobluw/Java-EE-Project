@@ -1,5 +1,8 @@
 package com.indigobluw.project;
 
+import org.springframework.stereotype.Controller;
+
+@Controller
 public class ToDoListController {
 
     ToDoListView view;
@@ -24,5 +27,9 @@ public class ToDoListController {
 
     public boolean getIsDone() {
         return model.getIsDone();
+    }
+
+    public void printListDetails() {
+        view.printDetails(model.getEntry(), model.getIsDone());
     }
 }

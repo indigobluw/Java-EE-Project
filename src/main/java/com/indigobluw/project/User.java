@@ -1,17 +1,28 @@
 package com.indigobluw.project;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
 
-    public Long getID() {
-        return ID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String username;
+    private String password;
+    private String role;
+
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
-    public void setID(Long ID) {
-        this.ID = ID;
+    public User() {
+    }
+    public Long getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -30,29 +41,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
-
-    @Id
-    private Long ID;
-    private String username;
-    private String password;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "ID=" + ID +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", roles='" + roles + '\'' +
-                '}';
-    }
-
-    private String roles;
-
 }

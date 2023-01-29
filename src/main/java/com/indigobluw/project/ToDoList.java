@@ -1,23 +1,26 @@
 package com.indigobluw.project;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name= "lists")
 public class ToDoList {
     @Id
-    private Long Id;
-
-    public Long getId() {
-        return Id;
-    }
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String entry;
+    private boolean isDone;
 
+    public ToDoList(String entry, boolean isDone) {
+        this.entry = entry;
+        this.isDone = isDone;
+    }
     public ToDoList() {
     }
 
-    private boolean isDone;
+    public Long getId() {
+        return id;
+    }
 
     public String getEntry() {
         return entry;
@@ -27,7 +30,7 @@ public class ToDoList {
         this.entry = entry;
     }
 
-    public boolean getIsDone() {
+    public boolean isDone() {
         return isDone;
     }
 
