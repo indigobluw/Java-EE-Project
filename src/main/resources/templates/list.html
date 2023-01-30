@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo</title>
+</head>
+<body>
+
+<h1>ToDo</h1>
+<p>List: </p>
+<div th:each="banan: ${todos}">
+    <p th:text="${banan.entry}">placeholderEntry</p>
+    <p th:text="${banan.done}">placeholderDone</p>
+
+
+</div>
+</body>
+</html>

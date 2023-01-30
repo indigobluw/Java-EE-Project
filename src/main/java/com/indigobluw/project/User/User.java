@@ -1,4 +1,4 @@
-package com.indigobluw.project;
+package com.indigobluw.project.User;
 
 import jakarta.persistence.*;
 
@@ -6,9 +6,11 @@ import jakarta.persistence.*;
 @Table(name = "users")
 public class User {
 
+    @SequenceGenerator(name="userIdGenerator", allocationSize = 1)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "userIdGenerator")
     private Long id;
+
     private String username;
     private String password;
     private String role;

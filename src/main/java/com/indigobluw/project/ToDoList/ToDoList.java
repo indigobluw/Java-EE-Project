@@ -1,13 +1,15 @@
-package com.indigobluw.project;
+package com.indigobluw.project.ToDoList;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name= "lists")
 public class ToDoList {
+    @SequenceGenerator(name="listIdGenerator", allocationSize = 1)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "listIdGenerator")
     private Long id;
+
     private String entry;
     private boolean isDone;
 
@@ -34,7 +36,7 @@ public class ToDoList {
         return isDone;
     }
 
-    public void setDone(boolean done) {
-        isDone = done;
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 }
