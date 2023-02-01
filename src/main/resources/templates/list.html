@@ -11,8 +11,9 @@
 <div th:each="banan: ${todos}">
     <p th:text="${banan.entry}">placeholderEntry</p>
     <p th:text="${banan.done}">placeholderDone</p>
-
-
+</div>
+<div>
+    <a th:href="@{/test}"> go to todolist </a> <!-- ingen error när man kör men får en 404 i browsern lektion 6 2:21:30-->
 </div>
 </body>
 </html>

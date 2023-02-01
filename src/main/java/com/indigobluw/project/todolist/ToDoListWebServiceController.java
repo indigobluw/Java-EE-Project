@@ -1,4 +1,4 @@
-package com.indigobluw.project.ToDoList;
+package com.indigobluw.project.todolist;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

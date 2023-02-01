@@ -1,4 +1,4 @@
-package com.indigobluw.project.User;
+package com.indigobluw.project.user;
 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 

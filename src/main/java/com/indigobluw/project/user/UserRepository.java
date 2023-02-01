@@ -1,8 +1,8 @@
-package com.indigobluw.project.ToDoList;
+package com.indigobluw.project.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ToDoListRepository extends JpaRepository<ToDoList, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 }

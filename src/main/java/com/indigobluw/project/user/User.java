@@ -1,4 +1,4 @@
-package com.indigobluw.project.User;
+package com.indigobluw.project.user;
 
 import jakarta.persistence.*;
 
