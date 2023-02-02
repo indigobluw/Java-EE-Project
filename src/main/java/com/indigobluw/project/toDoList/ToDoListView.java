@@ -1,4 +1,4 @@
-package com.indigobluw.project.todolist;
+package com.indigobluw.project.toDoList;
 
 public class ToDoListView {
     /*public void printDetails(String toDoListEntry, boolean isDone) {

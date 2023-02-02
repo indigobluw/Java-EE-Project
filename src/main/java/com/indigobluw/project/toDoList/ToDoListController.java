@@ -1,4 +1,4 @@
-package com.indigobluw.project.todolist;
+package com.indigobluw.project.toDoList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

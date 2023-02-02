@@ -1,4 +1,4 @@
-package com.indigobluw.project.apistructure;
+package com.indigobluw.project.apiStructure;
 
 import java.util.ArrayList;
 
