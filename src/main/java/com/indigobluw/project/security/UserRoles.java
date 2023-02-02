@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static com.indigobluw.project.security.UserPermissions.*;
 
+//This isn't a must, can use String Admin instead
 public enum UserRoles {
     ADMIN (List.of(ADMIN_CAN_READ, ADMIN_CAN_DELETE)), //innan import på rad 4 fick man skriva permissions.admin_can_read
     USER(List.of(USER_CAN_READ));
@@ -21,8 +22,8 @@ public enum UserRoles {
 
     private final List<UserPermissions> permissionsList;
 
-    UserRoles(List<UserPermissions> permissionsList) {
-        this.permissionsList = permissionsList;
+    UserRoles(List<UserPermissions> permissions) {
+        this.permissionsList = permissions;
     }
 
     public List<UserPermissions> getPermissionsList() {
@@ -30,11 +31,11 @@ public enum UserRoles {
     }
 
     public List<SimpleGrantedAuthority> getGrantedAuthorities() {
-        List<SimpleGrantedAuthority> permissions =  new ArrayList<>(getPermissionsList().stream().map(
+        List<SimpleGrantedAuthority> permissionsList =  new ArrayList<>(getPermissionsList().stream().map(
                 index -> new SimpleGrantedAuthority(index.getUserPermissions())
         ).toList());
-        permissions.add(new SimpleGrantedAuthority("ROLE_" + this.name())); //"ROLE_" + this.name lektion 7 1:58:00
+        permissionsList.add(new SimpleGrantedAuthority("ROLE_" + this.name())); //"ROLE_" + this.name lektion 7 1:58:00
 
-        return permissions;
+        return permissionsList;
     }
 }

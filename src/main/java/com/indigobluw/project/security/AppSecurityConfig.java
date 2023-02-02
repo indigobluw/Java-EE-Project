@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity //pre-authorize
+@EnableMethodSecurity //enables @PreAuthorize
 public class AppSecurityConfig {
 
     @Bean
@@ -40,7 +40,7 @@ public class AppSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/error", "/login").permitAll() //nu kan man titta på homepage utan att vara inloggad
+                .requestMatchers("/", "/error", "/login", "/test/encode").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()

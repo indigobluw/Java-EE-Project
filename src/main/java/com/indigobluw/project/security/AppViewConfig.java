@@ -7,8 +7,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc // detta kommer fukka koden i lektion 7 apparently lol
-public class WebConfig implements WebMvcConfigurer {
-    @Override
+public class AppViewConfig implements WebMvcConfigurer {
+    @Override //polymorphism
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("list");
         registry.addViewController("/listid").setViewName("listbyid"); //samma sak som när man gör en controller
