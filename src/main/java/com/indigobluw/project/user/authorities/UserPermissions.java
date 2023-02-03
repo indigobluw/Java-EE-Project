@@ -1,4 +1,4 @@
-package com.indigobluw.project.security;
+package com.indigobluw.project.user.authorities;
 
 public enum UserPermissions {
 

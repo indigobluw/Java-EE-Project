@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name= "lists")
-public class ToDoList {
+public class ToDoListModel {
     @SequenceGenerator(name="listIdGenerator", allocationSize = 1)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "listIdGenerator")
@@ -13,11 +13,11 @@ public class ToDoList {
     private String entry;
     private boolean isDone;
 
-    public ToDoList(String entry, boolean isDone) {
+    public ToDoListModel(String entry, boolean isDone) {
         this.entry = entry;
         this.isDone = isDone;
     }
-    public ToDoList() {
+    public ToDoListModel() {
     }
 
     public Long getId() {

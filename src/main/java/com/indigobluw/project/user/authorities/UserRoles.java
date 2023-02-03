@@ -1,10 +1,11 @@
-package com.indigobluw.project.security;
+package com.indigobluw.project.user.authorities;
 
+import com.indigobluw.project.user.authorities.UserPermissions;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.ArrayList;
 import java.util.List;
-import static com.indigobluw.project.security.UserPermissions.*;
+import static com.indigobluw.project.user.authorities.UserPermissions.*;
 
 //This isn't a must, can use String Admin instead
 public enum UserRoles {

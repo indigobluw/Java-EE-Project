@@ -28,7 +28,7 @@ public class ToDoListController {
 
     @GetMapping("/ToDoList/{id}")
     public String getToDoListByIdPage(Model model, @PathVariable String id) { //lektion 4, 2:29:22
-        Optional<ToDoList> todosies = toDoListRepository.findById(Long.valueOf(id));
+        Optional<ToDoListModel> todosies = toDoListRepository.findById(Long.valueOf(id));
         todosies.ifPresentOrElse(model::addAttribute, null); //if else metod
         return "listbyid";
     }

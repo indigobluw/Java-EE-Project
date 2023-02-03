@@ -1,7 +1,10 @@
 package com.indigobluw.project.security;
 
+import com.indigobluw.project.user.authorities.UserRoles;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity //enables @PreAuthorize
 public class AppSecurityConfig {
 
-    @Bean
+   /* @Bean
     public UserDetailsService userDetailsService() {
 
         //the following ppl is for debugging ONLY
@@ -34,7 +37,7 @@ public class AppSecurityConfig {
                 .build();
 
         return new InMemoryUserDetailsManager(therese, jesper); //användare försvinner efter reset app
-    }
+    }*/
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -45,8 +48,19 @@ public class AppSecurityConfig {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .and()
+                .authenticationProvider(authenticationOverride());
 
         return http.build();
+    }
+    @Autowired
+    public DaoAuthenticationProvider authenticationOverride() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+
+        //provider.setPasswordEncoder(AppPasswordConfig.bCryptPasswordEncoder()); //i Kristoffers exempel skrev han appPasswordConfig med litet a
+        //provider.setUserDetailsService(UserDetailsService); //i Kristoffers exempel skrev han userDetailsService med liten bokstav i början
+
+        return provider;
     }
 }

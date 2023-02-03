@@ -20,15 +20,15 @@ public class ToDoListWebServiceController {
     }
 
     @GetMapping("/ws/ToDoList")
-    public ResponseEntity<List<ToDoList>> getAllToDoLists(){
+    public ResponseEntity<List<ToDoListModel>> getAllToDoLists(){
 
         return new ResponseEntity<>(toDoListRepository.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/ws/ToDoList")
-    public ResponseEntity<ToDoList> saveList(@RequestBody ToDoList toDoList) {
+    public ResponseEntity<ToDoListModel> saveList(@RequestBody ToDoListModel toDoListModel) {
 
-        return new ResponseEntity<>(toDoListRepository.save(toDoList), HttpStatus.OK);
+        return new ResponseEntity<>(toDoListRepository.save(toDoListModel), HttpStatus.OK);
     }
     /*public String hello(Model model) { //returns string cuz it's a text doc
         model.addAttribute("message", "hello world");
