@@ -6,13 +6,13 @@ public enum UserPermissions {
     ADMIN_CAN_DELETE("ADMIN:DELETE"),
     USER_CAN_READ("USER:READ");
 
-    private final String userPermissions;
+    private final String userPermission;
 
-    UserPermissions(String userPermissions) {
-        this.userPermissions = userPermissions;
+    UserPermissions(String userPermission) {
+        this.userPermission = userPermission;
     }
 
-    public String getUserPermissions() {
-        return userPermissions;
+    public String getUserPermission() {
+        return userPermission;
     }
 }

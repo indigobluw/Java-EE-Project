@@ -1,6 +1,6 @@
 package com.indigobluw.project.security;
 
-import com.indigobluw.project.user.authorities.UserRoles;
+import com.indigobluw.project.user.UserModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,10 +8,6 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -19,7 +15,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity //enables @PreAuthorize
 public class AppSecurityConfig {
 
-   /* @Bean
+    private final AppPasswordConfig bcrypt;
+    private final UserModelService userModelService;
+
+    @Autowired
+    public AppSecurityConfig(AppPasswordConfig bcrypt, UserModelService userModelService) {
+        this.bcrypt = bcrypt;
+        this.userModelService = userModelService;
+    }
+
+    /* @Bean
     public UserDetailsService userDetailsService() {
 
         //the following ppl is for debugging ONLY
@@ -43,7 +48,7 @@ public class AppSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/error", "/login", "/test/encode").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
+                .requestMatchers("/", "/error", "/login", "/test/**").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
@@ -58,8 +63,8 @@ public class AppSecurityConfig {
     public DaoAuthenticationProvider authenticationOverride() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 
-        //provider.setPasswordEncoder(AppPasswordConfig.bCryptPasswordEncoder()); //i Kristoffers exempel skrev han appPasswordConfig med litet a
-        //provider.setUserDetailsService(UserDetailsService); //i Kristoffers exempel skrev han userDetailsService med liten bokstav i början
+        provider.setUserDetailsService(userModelService);
+        provider.setPasswordEncoder(bcrypt.bCryptPasswordEncoder());
 
         return provider;
     }
