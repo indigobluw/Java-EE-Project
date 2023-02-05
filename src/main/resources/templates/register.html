@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Account</title>
+        <style>
+            .error {
+                color: red;
+            }
+        </style>
+</head>
+<body>
+    <div>
+        <form th:action="@{/register}" th:object="${userModel}" method="post">
+            <div>
+                <p>Username: </p>
+                    <input th:field="*{username}" type="text" placeholder="Write your username here">
+                        <ul>
+                            <li th:if="${ #fields.hasErrors('username')}"
+                                th:errorclass="error"
+                                th:errors="*{username}"></li>
+                        </ul>
+            </div>
+            <div>
+                <p>Password: </p>
+                    <input th:field="*{password}" type="password" placeholder="Write your password here">
+                        <ul>
+                            <!--rad 28 verkar vara ett problem...#10 tid ca 2:10:00 -->
+                            <li th:each="error : ${fields.errors('password')}"
+                                th:text="${error}"
+                                class="error"></li>
+                </ul>
+            </div>
+                <input type="submit" value="Register">
+        </form>
+    </div>
+</body>
+</html>

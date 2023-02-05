@@ -1,23 +1,35 @@
 package com.indigobluw.project.user;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class UserModel implements UserDetails {
 
-    @SequenceGenerator(name="userIdGenerator", allocationSize = 1)
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "userIdGenerator")
+    @SequenceGenerator(name="userIdGenerator", allocationSize = 1)
     private Long id;
-
+    @NotEmpty
+    //@Email
+    @Size(min = 4, max = 12)
     private String username;
+    @NotEmpty
+    @Size(min = 5, max = 50)
     private String password;
+
     //private String role;
    // private List<? extends GrantedAuthority> authorities;
+    @ElementCollection //utan denna annotaion får List error att inte vara en @Basic
+    private List<String> authorities;
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
@@ -25,15 +37,46 @@ public class UserModel implements UserDetails {
 
     public UserModel() {}
 
-    public UserModel(String username, String password, boolean isAccountNonExpired,
+    public UserModel(String username, String password,List<String> authorities, boolean isAccountNonExpired,
                      boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.username = username;
         this.password = password;
+        this.authorities = authorities;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
         this.isEnabled = isEnabled;
     }
+
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAuthorities(List<String> authorities) {
+        this.authorities = authorities;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
     @Override
     public String getUsername() {
         return username;
@@ -67,5 +110,20 @@ public class UserModel implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+    //for debugging only, must be deleted later
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", authorities=" + authorities +
+                ", isAccountNonExpired=" + isAccountNonExpired +
+                ", isAccountNonLocked=" + isAccountNonLocked +
+                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
+                ", isEnabled=" + isEnabled +
+                '}';
     }
 }

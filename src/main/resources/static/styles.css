@@ -1,3 +1,35 @@
-h1 {
-    color:red;
+/*h1 {
+    color: red;
+}
+
+.page{
+    background-image: url("homepage.png");
+    width: 1920px;
+    height: 1281px;
+}
+
+.navbar {
+    background-color: red;
+    height: 40px;
+    width: 100%;
+}
+
+.nav-link{
+    display: flex;
+    flex-direction: row;
+
+}
+.loginBtn {
+    text-decoration: none;
+
+}*/
+
+nav{
+    color: purple;
+    height: 20px;
+    width: 100%;
+}
+
+body {
+    color: red;
 }

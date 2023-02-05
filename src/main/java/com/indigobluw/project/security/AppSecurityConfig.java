@@ -48,7 +48,7 @@ public class AppSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/error", "/login", "/test/**").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
+                .requestMatchers("/", "/error", "/login", "/test/**", "/register").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()

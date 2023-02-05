@@ -1,6 +1,7 @@
 package com.indigobluw.project.toDoList;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name= "lists")
@@ -9,7 +10,7 @@ public class ToDoListModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "listIdGenerator")
     private Long id;
-
+    @NotEmpty
     private String entry;
     private boolean isDone;
 

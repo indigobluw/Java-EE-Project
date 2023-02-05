@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo - What To Do Today?</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<section class="navbar">
+    <nav>
+        <div class="nav-link" id="navLinks">
+                <a href="">What is ToDo?</a>
+                <a href="">Create Lists</a>
+                <a href="">Create Account</a>
+            <button th:action="@{/test}" class="loginBtn">Logga in</button>
+        </div>
+    </nav>
+</section>
+<section class="page">
+    <h1>ToDo - What are you doing today?</h1>
+    <p>Simplest, fastest and the best way to create and finish tasks </p>
+    <p><a href="">Get started!</a></p>
+
+</section>
+</body>
+</html>
