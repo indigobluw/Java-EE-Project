@@ -5,12 +5,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
-@Entity
+@Entity //entity får inte vara final
 @Table(name = "users")
 public class UserModel implements UserDetails {
 
@@ -29,8 +31,8 @@ public class UserModel implements UserDetails {
 
     //private String role;
     // private List<? extends GrantedAuthority> authorities;
-    @ElementCollection //utan denna annotaion får List error att inte vara en @Basic
-    private List<String> authorities;
+    @ElementCollection(fetch = FetchType.EAGER) //utan denna annotaion får List error att inte vara en @Basic
+    private Set<SimpleGrantedAuthority> authorities;
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
@@ -39,7 +41,7 @@ public class UserModel implements UserDetails {
     public UserModel() {
     }
 
-    public UserModel(String username, String password, List<String> authorities, boolean isAccountNonExpired,
+    public UserModel(String username, String password, Set<SimpleGrantedAuthority> authorities, boolean isAccountNonExpired,
                      boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.username = username;
         this.password = password;
@@ -59,7 +61,7 @@ public class UserModel implements UserDetails {
         this.password = password;
     }
 
-    public void setAuthorities(List<String> authorities) {
+    public void setAuthorities(Set<SimpleGrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 
@@ -91,7 +93,7 @@ public class UserModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null; //borde vara authorities...
+        return authorities;
     }
 
     @Override

@@ -1,20 +1,22 @@
 package com.indigobluw.project.security;
 
-import com.indigobluw.project.user.UserModel;
 import com.indigobluw.project.user.UserModelRepository;
 import com.indigobluw.project.user.UserModelService;
+import com.indigobluw.project.user.dataObjects.UserModelDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/test") //krille skriver "rest" ist för test. Med requstmapping tvingas användaren att ta usereller admin typ
+@RequestMapping("/test")
+//krille skriver "rest" ist för test. Med requstmapping tvingas användaren att ta usereller admin typ
 
 public class TestRestController {
 
     private final AppPasswordConfig bcrypt;
     private final UserModelService userModelService;
     private final UserModelRepository userModelRepository;
+
     @Autowired
     public TestRestController(AppPasswordConfig bcrypt, UserModelService userModelService,
                               UserModelRepository userModelRepository) { //kallar på AppPassConfig, lägger till constructor och autowired
@@ -48,14 +50,16 @@ public class TestRestController {
     public String testAdminPermission() {
         return "Only admins can enter";
     }
+
     @GetMapping("/user")
     @PreAuthorize("hasRole('ROLE_USER')")
     public String testUserPermission() {
         return "Only users can enter";
     }
+
     @GetMapping("/unknown")
     @PreAuthorize("hasRole('ROLE_ADMIN') " + " && " +
-    "hasAuthority('USER:READ') ")
+            "hasAuthority('USER:READ') ")
     public String testUnknownPermission() {
         return "This should never work";
     }
@@ -65,12 +69,17 @@ public class TestRestController {
         return bcrypt.bCryptPasswordEncoder().encode("password"); //lol
     }
 
-    @GetMapping("/find/{username}")
+    /*@GetMapping("/find/{username}")
     public UserModel findByUsername(@PathVariable String username) {
 
         System.out.println(userModelService.loadUserByUsername(username));
 
         return new UserModel(); //userModelService.loadUserByUsername(username) tog new UserModel bara för att få bort error
+    }*/
+
+    @GetMapping("/find/{username}")
+    public UserModelDTO findByUsername(@PathVariable String username) {
+        return new UserModelDTO(userModelService.loadUserByUsername(username));
     }
 
 }
