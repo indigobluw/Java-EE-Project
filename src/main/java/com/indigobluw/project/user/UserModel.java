@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class UserModel implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "userIdGenerator")
-    @SequenceGenerator(name="userIdGenerator", allocationSize = 1)
+    @SequenceGenerator(name = "userIdGenerator", allocationSize = 1)
     private Long id;
     @NotEmpty
     //@Email
@@ -27,7 +28,7 @@ public class UserModel implements UserDetails {
     private String password;
 
     //private String role;
-   // private List<? extends GrantedAuthority> authorities;
+    // private List<? extends GrantedAuthority> authorities;
     @ElementCollection //utan denna annotaion får List error att inte vara en @Basic
     private List<String> authorities;
     private boolean isAccountNonExpired;
@@ -35,9 +36,10 @@ public class UserModel implements UserDetails {
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
 
-    public UserModel() {}
+    public UserModel() {
+    }
 
-    public UserModel(String username, String password,List<String> authorities, boolean isAccountNonExpired,
+    public UserModel(String username, String password, List<String> authorities, boolean isAccountNonExpired,
                      boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.username = username;
         this.password = password;
@@ -89,7 +91,7 @@ public class UserModel implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return null; //borde vara authorities...
     }
 
     @Override

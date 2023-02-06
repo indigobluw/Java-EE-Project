@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-//när vi vill visa html filer använd controller. Rest controller returnerar json format
+//När vi vill visa html filer använd controller. Rest controller returnerar json format
 @Controller
 public class TestController {
 
@@ -42,6 +42,6 @@ public class TestController {
         userModel.setEnabled(true);
         userModelRepository.save(userModel); //om allt gått bra spara användare
         //model.addAttribute("user", userModel); visa upp användare #10 1:13:18
-        return"home"; //när man skapat inlogg skaman bli redirected till homepage
+        return"home"; //när man skapat inloggning ska man bli redirected till homepage
     }
 }

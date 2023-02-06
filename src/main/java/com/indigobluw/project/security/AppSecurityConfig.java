@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity //enables @PreAuthorize
@@ -47,18 +49,35 @@ public class AppSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests()
-                .requestMatchers("/", "/error", "/login", "/test/**", "/register").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
-                .requestMatchers("/admin").hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin()
-                .and()
+                .csrf().disable()
+                .authorizeHttpRequests(requests ->
+                        requests
+                                .requestMatchers("/", "/error", "/login", "/test/**", "/register", "/static/**").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
+                                .requestMatchers("/admin").hasRole("ADMIN")
+                                .anyRequest()
+                                .authenticated()
+
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                )
+                .rememberMe(rememberMe -> rememberMe
+                        .rememberMeParameter("remember-me")
+                        .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
+                        .userDetailsService(userModelService)
+                        .key("key")
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/logout")
+                        .clearAuthentication(true)
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID", "remember-me")
+                )
                 .authenticationProvider(authenticationOverride());
 
         return http.build();
     }
+
     @Autowired
     public DaoAuthenticationProvider authenticationOverride() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
