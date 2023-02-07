@@ -52,7 +52,7 @@ public class AppSecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(requests ->
                         requests
-                                .requestMatchers("/", "/error", "/login", "/test/**", "/register", "/static/**").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
+                                .requestMatchers("/", "/saveBenny", "/error", "/login", "/test/**", "/register", "/static/**").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
                                 .requestMatchers("/admin").hasRole("ADMIN")
                                 .anyRequest()
                                 .authenticated()

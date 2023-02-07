@@ -7,10 +7,14 @@ import java.util.stream.Collectors;
 
 import static com.indigobluw.project.user.authorities.UserPermissions.*;
 
-//This isn't a must, can use String Admin instead
 public enum UserRoles {
-    ADMIN (Set.of(ADMIN_CAN_READ, ADMIN_CAN_DELETE)), //innan import på rad 4 fick man skriva permissions.admin_can_read
-    USER(Set.of(USER_CAN_READ));
+    ADMIN(Set.of(ADMIN_CAN_READ,
+            ADMIN_CAN_DELETE,
+            ADMIN_CAN_WRITE,
+            ADMIN_CAN_POST)), //innan import på rad 4 fick man skriva permissions.admin_can_read
+    USER(Set.of(USER_CAN_READ,
+            USER_CAN_WRITE,
+            USER_CAN_POST));
 
     /*private final String description;
     Roles(String description) {
@@ -21,21 +25,22 @@ public enum UserRoles {
         return description;
     }*/
 
-    private final Set<UserPermissions> permissionsSet;
+    private final Set<UserPermissions> permissionsList;
 
     UserRoles(Set<UserPermissions> permissions) {
-        this.permissionsSet = permissions;
+        this.permissionsList = permissions;
     }
 
     public Set<UserPermissions> getPermissions() {
-        return permissionsSet;
+        return permissionsList;
     }
 
-//Under denna kommentar ser annurlunda ut i sliden men liknande som hans kod från github #9 slide 28
     public Set<SimpleGrantedAuthority> getGrantedAuthorities() {
-        Set<SimpleGrantedAuthority> permissionsSet =  getPermissions().stream().map(
+        
+        Set<SimpleGrantedAuthority> permissionsSet = getPermissions().stream().map(
                 index -> new SimpleGrantedAuthority(index.getUserPermission())
-        ).collect(Collectors.toSet());
+        ).collect(Collectors.toSet()); //recap video 1:59:36 new Hashset
+
         permissionsSet.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
 
         return permissionsSet;

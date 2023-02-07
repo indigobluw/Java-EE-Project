@@ -16,21 +16,20 @@ import java.util.Set;
 @Table(name = "users")
 public class UserModel implements UserDetails {
 
-
+    @SequenceGenerator(name = "userIdGenerator", allocationSize = 1)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "userIdGenerator")
-    @SequenceGenerator(name = "userIdGenerator", allocationSize = 1)
     private Long id;
     @NotEmpty
     //@Email
-    @Size(min = 4, max = 12)
+    @Size(min = 2, max = 50)
     private String username;
     @NotEmpty
-    @Size(min = 5, max = 50)
+    @Size(min = 6, max = 200)
     private String password;
 
-    //private String role;
-    // private List<? extends GrantedAuthority> authorities;
+
+    //private List<? extends GrantedAuthority> authorities;
     @ElementCollection(fetch = FetchType.EAGER) //utan denna annotaion får List error att inte vara en @Basic
     private Set<SimpleGrantedAuthority> authorities;
     private boolean isAccountNonExpired;

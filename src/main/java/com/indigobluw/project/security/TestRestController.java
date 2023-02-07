@@ -1,7 +1,9 @@
 package com.indigobluw.project.security;
 
+import com.indigobluw.project.user.UserModel;
 import com.indigobluw.project.user.UserModelRepository;
 import com.indigobluw.project.user.UserModelService;
+import com.indigobluw.project.user.authorities.UserRoles;
 import com.indigobluw.project.user.dataObjects.UserModelDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,29 +11,29 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/test")
-//krille skriver "rest" ist för test. Med requstmapping tvingas användaren att ta usereller admin typ
+//kristoffer skriver "rest" ist för test.
 
 public class TestRestController {
 
     private final AppPasswordConfig bcrypt;
     private final UserModelService userModelService;
-    private final UserModelRepository userModelRepository;
+    private final UserModelRepository userModelRepository; //- används endast med saveBenny
 
     @Autowired
     public TestRestController(AppPasswordConfig bcrypt, UserModelService userModelService,
                               UserModelRepository userModelRepository) { //kallar på AppPassConfig, lägger till constructor och autowired
         this.bcrypt = bcrypt;
         this.userModelService = userModelService;
-        this.userModelRepository = userModelRepository;
+        this.userModelRepository = userModelRepository; //- används endast med saveBenny
     }
 
-    /*@GetMapping("/saveBenny")
+    @GetMapping("/saveBenny")
     public UserModel saveUserBenny() {
 
         UserModel benny = new UserModel(
-              "Benny",
-                bcrypt.bCryptPasswordEncoder().encode("123"),
-                UserRoles.USER.getGrantedAuthorities(),
+                "Benny",
+                bcrypt.bCryptPasswordEncoder().encode("123456"),
+                UserRoles.ADMIN.getGrantedAuthorities(),
                 true,
                 true,
                 true,
@@ -41,7 +43,7 @@ public class TestRestController {
         System.out.println(benny);
 
         return userModelRepository.save(benny); //return newResponseEntity<>(benny, Httpstatus.OK); står det i sliden lektion 9 slide 27
-    }*/
+    }
 
     @PostMapping("/")
 
