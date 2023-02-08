@@ -42,3 +42,35 @@ a:hover {
     text-decoration: none;
     color: aliceblue;
 }
+
+.about-us-text {
+    padding-left: 3em;
+    padding-right: 3em;
+    padding-top: 2em;
+}
+
+/* Footer */
+
+.footer {
+    display: flex;
+    align-content: center;
+    position: relative;
+    justify-content: space-around;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    max-width: 30%;
+    z-index: 1;
+}
+
+.bi-facebook,
+.bi-apple,
+.bi-instagram,
+.bi-twitter {
+    cursor: pointer;
+}
+
+/* Login */
+
+.login-form {
+    margin-top: 200em;
+}
