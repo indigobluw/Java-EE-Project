@@ -47,6 +47,12 @@ public class TestRestController {
 
     @PostMapping("/")
 
+    @GetMapping("/password")
+    public String testPassword() {
+        System.out.println(bcrypt.bCryptPasswordEncoder().encode("123456"));
+        return "";
+    }
+
     @GetMapping("/admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String testAdminPermission() {

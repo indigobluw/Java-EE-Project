@@ -29,6 +29,7 @@ public class TestController {
 
     @GetMapping("/register")
     public String displayRegisterUser(UserModel userModel) {
+        System.out.println(appPasswordConfig.bCryptPasswordEncoder().encode("123456"));
         return "register"; //register.html
     }
 

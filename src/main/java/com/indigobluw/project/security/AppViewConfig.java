@@ -15,6 +15,7 @@ public class AppViewConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/"); //i kristoffers kommer ...location upp. men inte hos mig...
     }
+
     @Override //polymorphism
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("home");
@@ -23,5 +24,7 @@ public class AppViewConfig implements WebMvcConfigurer {
         registry.addViewController("/test").setViewName("test");
         registry.addViewController("/register").setViewName("register");
         registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/aboutus").setViewName("aboutus");
     }
 }
