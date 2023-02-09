@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ToDoListRepository extends JpaRepository<ToDoListModel, Long> {
+    //ToDoListModel findByToDoListEntry(String toDoListEntry);
 }

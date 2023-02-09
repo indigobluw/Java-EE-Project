@@ -11,19 +11,10 @@ public enum UserRoles {
     ADMIN(Set.of(ADMIN_CAN_READ,
             ADMIN_CAN_DELETE,
             ADMIN_CAN_WRITE,
-            ADMIN_CAN_POST)), //innan import på rad 4 fick man skriva permissions.admin_can_read
+            ADMIN_CAN_POST)),
     USER(Set.of(USER_CAN_READ,
             USER_CAN_WRITE,
             USER_CAN_POST));
-
-    /*private final String description;
-    Roles(String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }*/
 
     private final Set<UserPermissions> permissionsList;
 
@@ -36,7 +27,7 @@ public enum UserRoles {
     }
 
     public Set<SimpleGrantedAuthority> getGrantedAuthorities() {
-        
+
         Set<SimpleGrantedAuthority> permissionsSet = getPermissions().stream().map(
                 index -> new SimpleGrantedAuthority(index.getUserPermission())
         ).collect(Collectors.toSet()); //recap video 1:59:36 new Hashset

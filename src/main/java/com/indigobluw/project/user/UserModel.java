@@ -1,7 +1,6 @@
 package com.indigobluw.project.user;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,7 +8,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Entity //entity får inte vara final
@@ -19,7 +17,7 @@ public class UserModel implements UserDetails {
     @SequenceGenerator(name = "userIdGenerator", allocationSize = 1)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "userIdGenerator")
-    private Long id;
+    private Long userId;
     @NotEmpty
     //@Email
     @Size(min = 2, max = 50)
@@ -119,7 +117,7 @@ public class UserModel implements UserDetails {
     @Override
     public String toString() {
         return "UserModel{" +
-                "id=" + id +
+                "id=" + userId +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", authorities=" + authorities +

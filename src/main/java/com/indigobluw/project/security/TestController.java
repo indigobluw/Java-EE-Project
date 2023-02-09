@@ -29,7 +29,6 @@ public class TestController {
 
     @GetMapping("/register")
     public String displayRegisterUser(UserModel userModel) {
-        System.out.println(appPasswordConfig.bCryptPasswordEncoder().encode("123456"));
         return "register"; //register.html
     }
 
@@ -43,8 +42,8 @@ public class TestController {
         String role = String.valueOf(userModel.getAuthorities().iterator().next());
 
         switch (role) {
-            case "Admin" -> userModel.setAuthorities(UserRoles.ADMIN.getGrantedAuthorities());
-            case "User" -> userModel.setAuthorities(UserRoles.USER.getGrantedAuthorities());
+            case "ADMIN" -> userModel.setAuthorities(UserRoles.ADMIN.getGrantedAuthorities());
+            case "USER" -> userModel.setAuthorities(UserRoles.USER.getGrantedAuthorities());
         }
 
         userModel.setPassword(appPasswordConfig.bCryptPasswordEncoder().encode(userModel.getPassword()));
@@ -55,5 +54,15 @@ public class TestController {
         userModelRepository.save(userModel); //om allt gått bra spara användare
         //model.addAttribute("user", userModel); visa upp användare #10 1:13:18
         return "home"; //när man skapat inloggning ska man bli redirected till homepage
+    }
+
+    @GetMapping("/homeuser")
+    public String displayUserHome(UserModel userModel) {
+        return "homeuser";
+    }
+
+    @GetMapping("/adminhome")
+    public String displayAdminHome(UserModel userModel) {
+        return "admin";
     }
 }
