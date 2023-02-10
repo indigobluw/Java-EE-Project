@@ -1,10 +1,13 @@
 package com.indigobluw.project.toDoList;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Optional;
 
@@ -21,7 +24,7 @@ public class ToDoListController {
     @GetMapping("/ToDoList")
     public String getAllTodosPage(Model model) {
 
-        model.addAttribute("todos",toDoListRepository.findAll()); //todos eller kanske entries?
+        model.addAttribute("todos", toDoListRepository.findAll()); //todos eller kanske entries?
 
         return "list"; //list.html för att vara övertydlig
     }
@@ -33,31 +36,12 @@ public class ToDoListController {
         return "listbyid";
     }
 
-   /* ToDoListView view;
-    ToDoList model;
-
-    public ToDoListController(ToDoListView view, ToDoList model) {
-        this.view = view;
-        this.model = model;
+    @PostMapping("/ToDoList")
+    public String postList(@Valid ToDoListModel toDoListModel, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "list";
+        }
+        toDoListRepository.save(toDoListModel);
+        return "list";
     }
-
-    public void setEntry(String entry) {
-        model.setEntry(entry);
-    }
-
-    public String getEntry() {
-        return model.getEntry();
-    }
-
-    public void setIsDone(boolean isDone) {
-        model.setIsDone(isDone);
-    }
-
-    public boolean getDone() {
-        return model.isDone();
-    }
-
-    public void printListDetails() {
-        view.printDetails(model.getEntry(), model.isDone());
-    }*/
 }

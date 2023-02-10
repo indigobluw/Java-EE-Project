@@ -74,3 +74,24 @@ a:hover {
 .login-form {
     margin-top: 200em;
 }
+
+/* Admin */
+
+.admin-page {
+    background-image: url("admin.jpg");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    min-height: 80vh;
+    width: 100%;
+}
+
+/* User */
+.home-user {
+    background-image: url("user.jpg");
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    min-height: 80vh;
+    width: 100%;
+}

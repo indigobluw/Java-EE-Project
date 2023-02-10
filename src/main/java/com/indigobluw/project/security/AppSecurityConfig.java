@@ -75,12 +75,11 @@ public class AppSecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(requests ->
                         requests
-                                .requestMatchers("/", "/saveBenny", "/home", "/aboutus", "/error", "/login", "/test/**", "/register", "/static/**").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
+                                .requestMatchers("/", "/home", "/aboutus", "/error", "/login", "/test/**", "/register", "/static/**").permitAll() //Test encode är här tillfälligt lektion 8 2:17:40
                                 .requestMatchers("/admin").hasRole("ADMIN")
-                                .requestMatchers("/homeuser").hasRole("USER")
+                                .requestMatchers("/homeuser", "/list").hasRole("USER")
                                 .anyRequest()
                                 .authenticated()
-
                 )
                 .formLogin(formLogin -> formLogin
                                 .loginPage("/login")
@@ -93,7 +92,8 @@ public class AppSecurityConfig {
                         .key("key")
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/logout")
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
                         .clearAuthentication(true)
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID", "remember-me")
