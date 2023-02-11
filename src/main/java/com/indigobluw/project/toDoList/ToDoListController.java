@@ -5,9 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
 
@@ -44,4 +43,11 @@ public class ToDoListController {
         toDoListRepository.save(toDoListModel);
         return "list";
     }
+    /*@RequestMapping("/save")
+    public ModelAndView save(@ModelAttribute("list") ToDoListModel toDoListModel) {
+        ModelAndView mav = new ModelAndView("list");
+        ToDoListService.save(toDoListModel);
+        mav.addObject("list", ToDoListService.get());
+        return mav;
+    }*/
 }
